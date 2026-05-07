@@ -1,0 +1,293 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Improved color scheme for better visibility in light and dark modes */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 47% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 47% 11%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 47% 11%;
+  --primary: 158 64% 40%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222.2 47% 11%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215.4 16.3% 36%;
+  --accent: 210 40% 96%;
+  --accent-foreground: 222.2 47% 11%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 214.3 31.8% 85%;
+  --input: 214.3 31.8% 85%;
+  --ring: 158 64% 40%;
+  --radius: 0.5rem;
+  --chart-1: 158 64% 40%;
+  --chart-2: 160 60% 35%;
+  --chart-3: 162 55% 30%;
+  --chart-4: 164 50% 25%;
+  --chart-5: 166 45% 20%;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+/* Significantly improved dark mode colors for better text visibility */
+.dark {
+  --background: 222.2 47% 6%;
+  --foreground: 0 0% 95%;
+  --card: 222.2 47% 9%;
+  --card-foreground: 0 0% 95%;
+  --popover: 222.2 47% 9%;
+  --popover-foreground: 0 0% 95%;
+  --primary: 158 64% 52%;
+  --primary-foreground: 222.2 47% 6%;
+  --secondary: 217.2 32.6% 18%;
+  --secondary-foreground: 0 0% 95%;
+  --muted: 217.2 32.6% 18%;
+  --muted-foreground: 215 20.2% 75%;
+  --accent: 217.2 32.6% 18%;
+  --accent-foreground: 0 0% 95%;
+  --destructive: 0 62.8% 55%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 217.2 32.6% 28%;
+  --input: 217.2 32.6% 28%;
+  --ring: 158 64% 52%;
+  --chart-1: 158 64% 52%;
+  --chart-2: 160 60% 45%;
+  --chart-3: 162 55% 38%;
+  --chart-4: 164 50% 31%;
+  --chart-5: 166 45% 24%;
+  --sidebar: oklch(0.145 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.205 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom animations for Honeydrew Mills */
+@keyframes honeydrew-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes honeydrew-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.honeydrew-pulse {
+  animation: honeydrew-pulse 2s ease-in-out infinite;
+}
+
+.honeydrew-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.2), transparent);
+  background-size: 200% 100%;
+  animation: honeydrew-shimmer 2s infinite;
+}
+
+/* Biometric authentication styles */
+.biometric-scanner {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(158 64% 35%) 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 20px hsla(var(--primary), 0.3);
+}
+
+.biometric-scanner.active {
+  animation: honeydrew-pulse 1s ease-in-out infinite;
+  box-shadow: 0 0 30px hsla(var(--primary), 0.5);
+}
+
+/* Face detection overlay */
+.face-detection-overlay {
+  border: 2px dashed hsl(var(--primary));
+  border-radius: 50%;
+  animation: honeydrew-pulse 2s ease-in-out infinite;
+}
+
+/* Success states */
+.success-state {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(158 64% 35%) 100%);
+  color: white;
+}
+
+/* Loading states */
+.loading-shimmer {
+  background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--border)) 50%, hsl(var(--muted)) 75%);
+  background-size: 200% 100%;
+  animation: honeydrew-shimmer 1.5s infinite;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .mobile-optimized {
+    padding: 1rem;
+  }
+
+  .biometric-scanner {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* PWA specific styles */
+@media (display-mode: standalone) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Enhanced text visibility for all modes */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply text-foreground font-semibold;
+}
+
+p {
+  @apply text-foreground;
+}
+
+/* Form elements visibility */
+input,
+textarea,
+select {
+  @apply bg-background text-foreground border-input;
+}
+
+label {
+  @apply text-foreground font-medium;
+}
+
+/* Card text visibility */
+.card,
+[class*="Card"] {
+  @apply bg-card text-card-foreground;
+}
+
+/* Button visibility */
+button {
+  @apply transition-all duration-200;
+}
+
+/* Ensure links are visible */
+a {
+  @apply text-primary hover:text-primary/80 underline-offset-2;
+}
+
+/* Fix muted text to be more visible */
+.text-muted-foreground {
+  color: hsl(var(--muted-foreground));
+}
+
+/* Focus states for accessibility */
+:focus-visible {
+  @apply outline-2 outline-offset-2 outline-ring;
+}
+
+/* Ensure select dropdowns are visible */
+select option {
+  @apply bg-background text-foreground;
+}
+
+/* Table text visibility */
+table,
+th,
+td {
+  @apply text-foreground;
+}
+
+th {
+  @apply font-semibold;
+}
+
+/* Dialog and modal visibility */
+[role="dialog"] {
+  @apply bg-background text-foreground;
+}
+
+/* Dropdown menu visibility */
+[role="menu"],
+[role="listbox"] {
+  @apply bg-popover text-popover-foreground;
+}
+
+[role="menuitem"],
+[role="option"] {
+  @apply text-popover-foreground hover:bg-accent hover:text-accent-foreground;
+}

@@ -1,0 +1,97 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  fullName      String
+  mobile        String    @unique
+  username      String    @unique
+  password      String
+  balance       Float     @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  biometricData BiometricData?
+  transactions  Transaction[]
+  
+  @@index([mobile])
+  @@index([username])
+}
+
+model BiometricData {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  fingerprint     Boolean  @default(false)
+  face            Boolean  @default(false)
+  fingerprintData String?
+  faceData        String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+}
+
+model Transaction {
+  id            String   @id @default(cuid())
+  type          TransactionType
+  amount        String
+  recipient     String
+  category      TransactionCategory
+  date          DateTime @default(now())
+  balanceBefore Float?
+  balanceAfter  Float?
+  status        TransactionStatus @default(COMPLETED)
+  authMethod    AuthMethod?
+  
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId, date])
+  @@index([type])
+  @@index([category])
+}
+
+model QRCode {
+  id        Int      @id @default(autoincrement())
+  name      String
+  amount    String
+  qrData    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum TransactionType {
+  SENT
+  RECEIVED
+  RECHARGE
+  BILL
+}
+
+enum TransactionCategory {
+  TRANSFER
+  BILL
+  INCOME
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+enum AuthMethod {
+  FINGERPRINT
+  FACE
+  ADMIN
+}
